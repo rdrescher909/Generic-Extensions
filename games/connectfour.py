@@ -36,21 +36,21 @@ from discord.ext import commands
 class NumEmotes(Enum):
     """Represents unicode number plaques of each value."""
 
-    ONE = "\U00000031\U0000fe0f\U000020e3"
-    TWO = "\U00000032\U0000fe0f\U000020e3"
-    THREE = "\U00000033\U0000fe0f\U000020e3"
-    FOUR = "\U00000034\U0000fe0f\U000020e3"
-    FIVE = "\U00000035\U0000fe0f\U000020e3"
-    SIX = "\U00000036\U0000fe0f\U000020e3"
-    SEVEN = "\U00000037\U0000fe0f\U000020e3"
+    one = "\U00000031\U0000fe0f\U000020e3"
+    two = "\U00000032\U0000fe0f\U000020e3"
+    three = "\U00000033\U0000fe0f\U000020e3"
+    four = "\U00000034\U0000fe0f\U000020e3"
+    five = "\U00000035\U0000fe0f\U000020e3"
+    six = "\U00000036\U0000fe0f\U000020e3"
+    seven = "\U00000037\U0000fe0f\U000020e3"
 
 
 class DiscType(Enum):
     """Represents unicode circles for player 1, player 2, and empty spaces (black)"""
 
-    RED = "\U0001f534"
-    BLACK = "\U000026ab"
-    YELLOW = "\U0001f7e1"
+    red = "\U0001f534"
+    black = "\U000026ab"
+    yellow = "\U0001f7e1"
 
 
 @dataclass(slots=True, kw_only=True)
@@ -87,7 +87,7 @@ class ConnectFourBoard:
                 if item is not None:
                     out += f"{item.owner.emoji.value}"
                 else:
-                    out += f"{DiscType.BLACK.value}"
+                    out += f"{DiscType.black.value}"
             out += "\n"
         out += "".join((num.value for num in NumEmotes))  # BLACK MAGIC
 
@@ -128,8 +128,8 @@ class ConnectFourInput(discord.ui.View):
 
     def __init__(self, player_one: discord.Member, player_two: discord.Member) -> None:
         super().__init__(timeout=60)
-        self._player_one = Player(member=player_one, emoji=DiscType.RED)
-        self._player_two = Player(member=player_two, emoji=DiscType.YELLOW)
+        self._player_one = Player(member=player_one, emoji=DiscType.red)
+        self._player_two = Player(member=player_two, emoji=DiscType.yellow)
         self.player_iterator = itertools.cycle((self._player_one, self._player_two))
         self.current_player = next(self.player_iterator)  # update after each move
         self._board = ConnectFourBoard()
@@ -202,31 +202,31 @@ class ConnectFourInput(discord.ui.View):
         self._board.add_piece(players_move, DiscPiece(self.current_player))
         await self.update(interaction)
 
-    @discord.ui.button(emoji=NumEmotes.ONE.value)
+    @discord.ui.button(emoji=NumEmotes.one.value)
     async def button_numero_uno(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.handle_move(interaction, players_move=0)
 
-    @discord.ui.button(emoji=NumEmotes.TWO.value)
+    @discord.ui.button(emoji=NumEmotes.two.value)
     async def button_numero_dos(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.handle_move(interaction, players_move=1)
 
-    @discord.ui.button(emoji=NumEmotes.THREE.value)
+    @discord.ui.button(emoji=NumEmotes.three.value)
     async def button_numero_tres(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.handle_move(interaction, players_move=2)
 
-    @discord.ui.button(emoji=NumEmotes.FOUR.value)
+    @discord.ui.button(emoji=NumEmotes.four.value)
     async def button_numero_cuatro(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.handle_move(interaction, players_move=3)
 
-    @discord.ui.button(emoji=NumEmotes.FIVE.value)
+    @discord.ui.button(emoji=NumEmotes.five.value)
     async def button_numero_cinco(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.handle_move(interaction, players_move=4)
 
-    @discord.ui.button(emoji=NumEmotes.SIX.value)
+    @discord.ui.button(emoji=NumEmotes.six.value)
     async def button_numero_seis(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.handle_move(interaction, players_move=5)
 
-    @discord.ui.button(emoji=NumEmotes.SEVEN.value)
+    @discord.ui.button(emoji=NumEmotes.seven.value)
     async def button_numero_siete(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.handle_move(interaction, players_move=6)
 
