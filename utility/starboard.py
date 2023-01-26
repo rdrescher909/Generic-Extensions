@@ -27,6 +27,7 @@ INCOMPLETE
         - Handle message edits
         - Handle message deletes
         - Cooldown for updating the status of a message so it can't be spammed on and off?
+        - Ensure error handling is correct
 
 This module uses the following third party libs installed via pip: asqlite (https://github.com/Rapptz/asqlite)
 """
