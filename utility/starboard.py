@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS starboardguild (
 
 _logger = logging.getLogger(__name__)
 
-@dataclass
+@dataclass(slots=True)
 class StarredMessage:
     message_id: int
     channel_id: int
@@ -125,7 +125,7 @@ class StarredMessage:
         return embed
 
 
-@dataclass
+@dataclass(slots=True)
 class StarboardGuild:
     id: int
     starboard_channel_id: int
