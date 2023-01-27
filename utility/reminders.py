@@ -33,7 +33,7 @@ import asqlite
 import discord
 from discord.ext import commands, tasks
 
-from utils.converters import TimeConverter, ConverterReturn
+from utils.converters import TimeConverter
 
 DB_FILENAME = "reminders.sqlite"
 
