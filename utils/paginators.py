@@ -296,6 +296,9 @@ class BasePaginatorView(ABC, Generic[T], discord.ui.View):
 
 
 class EmbedPaginator(BasePaginatorView[discord.Embed]):
+    def __init__(self, *, owner: discord.Member | discord.User, pages: List[discord.Embed], timeout: float = 30) -> None:
+        super().__init__(owner=owner, pages=pages, timeout=timeout)
+
     async def format_page(self) -> discord.Embed:
         return self.current_page
 
