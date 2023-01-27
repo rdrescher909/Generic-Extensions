@@ -32,7 +32,7 @@ import asqlite
 import discord
 from discord.ext import commands
 
-from utils.paginator import EmbedPaginatorView
+from utils.paginators import EmbedPaginator
 
 ALLOWED_MENTIONS = discord.AllowedMentions.none()
 
@@ -223,8 +223,7 @@ class TagsCog(commands.Cog):
                     embeds.append(embed)
 
                 if len(embeds) > 1:
-                    paginator = EmbedPaginatorView(ctx.author, embeds)
-                    paginator.message = await ctx.send(embed=paginator.initial, view=paginator)
+                    await EmbedPaginator.start(ctx, ctx.author, embeds)
                 elif len(embeds) == 1:
                     await ctx.send(embed=embeds[0])
                 else:
@@ -268,8 +267,7 @@ class TagsCog(commands.Cog):
                     embeds.append(embed)
 
                 if len(embeds) > 1:
-                    paginator = EmbedPaginatorView(ctx.author, embeds)
-                    paginator.message = await ctx.send(embed=paginator.initial, view=paginator)
+                    paginator = await EmbedPaginator.start(ctx, owner=ctx.author, pages=embeds)
                 elif len(embeds) == 1:
                     await ctx.send(embed=embeds[0])
                 else:
