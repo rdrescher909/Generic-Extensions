@@ -282,7 +282,6 @@ class BasePaginatorView(ABC, Generic[T], discord.ui.View):
         """
         ...
 
-    @abstractmethod
     async def on_stop(self, interaction: discord.Interaction) -> None:
         """Perform any behavior you'd like when someone hits the stop button
         By default this just edits the message to remove the view.
@@ -293,7 +292,7 @@ class BasePaginatorView(ABC, Generic[T], discord.ui.View):
         interaction : discord.Interaction
             The interaction that triggered the stop
         """
-        ...
+        raise NotImplementedError()
 
 
 class EmbedPaginator(BasePaginatorView[discord.Embed]):
@@ -304,5 +303,3 @@ class EmbedPaginator(BasePaginatorView[discord.Embed]):
         current_page = await self.format_page()
         await interaction.response.edit_message(embed=current_page, view=self)
 
-    async def on_stop(self, interaction: discord.Interaction) -> None:
-        return await super().on_stop(interaction)
