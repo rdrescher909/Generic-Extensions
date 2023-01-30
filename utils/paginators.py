@@ -33,7 +33,7 @@ T = TypeVar('T')
 
 _logger = logging.getLogger(__name__)
 
-class ToPageModal(discord.ui.Modal, title="Go to page...t"):
+class ToPageModal(discord.ui.Modal, title="Go to page..."):
     new_page = discord.ui.TextInput(label="Page", placeholder="What page are we going to?", min_length=1) # type: ignore
 
     def __init__(self, *, max_pages: Optional[int]) -> None:
